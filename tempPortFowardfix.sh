@@ -5,8 +5,9 @@ LOOP_PID=""
 function finish {
   echo CLEANING!
   # do the process deletion here
-  killall kubectl
   [ -n "${LOOP_PID}" ] && kill $LOOP_PID && echo "process with pid $LOOP_PID killed successfully"
+  killall kubectl
+  killall goreman
   exit
 }
 
@@ -27,6 +28,6 @@ sleep 2
 
 make start-e2e &
 echo "Executing e2e tests"
-make test-e2e
-#killall kubectl
-#killall goreman
+#make test-e2e
+sleep 5
+#make test-e2e
